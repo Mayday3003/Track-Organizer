@@ -1,15 +1,20 @@
+# src/model/song.py
+
 class Song:
     def __init__(self, title: str, artist: str, album: str, duration: float, genre: str):
+        """
+        Initialize a Song with title, artist, album, duration (in seconds) and genre.
+        """
         self.title = title
         self.artist = artist
         self.album = album
         self.duration = duration
         self.genre = genre
 
-    def __str__(self):
-        return f"🎵 {self.title} by {self.artist} | Album: {self.album} | {self.duration} min | Genre: {self.genre}"
+    def __str__(self) -> str:
+        return f"🎵 {self.title} by {self.artist} | Album: {self.album} | {self.duration} sec | Genre: {self.genre}"
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "title": self.title,
             "artist": self.artist,
@@ -25,5 +30,5 @@ class Song:
             artist=data["artist"],
             album=data["album"],
             duration=data["duration"],
-            genre=data.get("genre", "Unknown")  # usa "Unknown" si no existe
+            genre=data.get("genre", "Unknown")
         )

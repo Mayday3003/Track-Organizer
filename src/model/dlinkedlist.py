@@ -1,4 +1,4 @@
-# src/model/doubly_linked_list.py
+# src/model/dlinkedlist.py
 
 class DNode:
     def __init__(self, value, next=None, prev=None):
@@ -16,7 +16,7 @@ class DLinkedList:
         self.tail = None
         self.size = 0
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         return self.head is None
 
     def insert_back(self, value):
@@ -38,6 +38,20 @@ class DLinkedList:
             self.head.prev = new_node
             self.head = new_node
         self.size += 1
+
+    def delete_node(self, node: DNode):
+        """Remove a specific node from the list."""
+        if not node:
+            return None
+        if node == self.head:
+            return self.delete_front()
+        elif node == self.tail:
+            return self.delete_back()
+        else:
+            node.prev.next = node.next
+            node.next.prev = node.prev
+            self.size -= 1
+            return node.value
 
     def delete_back(self):
         if self.is_empty():
@@ -63,7 +77,7 @@ class DLinkedList:
         self.size -= 1
         return removed.value
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.size
 
     def __iter__(self):
@@ -72,6 +86,6 @@ class DLinkedList:
             yield current.value
             current = current.next
 
-    def __str__(self):
-        values = [str(node) for node in self]
+    def __str__(self) -> str:
+        values = [str(value) for value in self]
         return " <-> ".join(values) + " <-> None" if values else "Empty list"
