@@ -1,0 +1,33 @@
+[
+    {
+      "title": "Bohemian Rhapsody",
+      "artist": "Queen",
+      "album": "A Night at the Opera",
+      "duration": 354
+    },
+    {
+      "title": "Billie Jean",
+      "artist": "Michael Jackson",
+      "album": "Thriller",
+      "duration": 294
+    },
+    {
+      "title": "Imagine",
+      "artist": "John Lennon",
+      "album": "Imagine",
+      "duration": 183
+    },
+    {
+      "title": "Smells Like Teen Spirit",
+      "artist": "Nirvana",
+      "album": "Nevermind",
+      "duration": 301
+    },
+    {
+      "title": "Hey Jude",
+      "artist": "The Beatles",
+      "album": "Hey Jude",
+      "duration": 431
+    }
+  ]
+  
