@@ -1,14 +1,13 @@
 # src/model/dlinkedlist.py
 
 class DNode:
-    def __init__(self, value, next=None, prev=None):
+    def __init__(self, value):
         self.value = value
-        self.next = next
-        self.prev = prev
+        self.next = None
+        self.prev = None
 
     def __str__(self):
         return str(self.value)
-
 
 class DLinkedList:
     def __init__(self):
@@ -17,15 +16,18 @@ class DLinkedList:
         self.size = 0
 
     def is_empty(self) -> bool:
-        return self.head is None
+        return self.size == 0
 
     def insert_back(self, value):
         new_node = DNode(value)
         if self.is_empty():
             self.head = self.tail = new_node
+            new_node.next = new_node.prev = new_node
         else:
             new_node.prev = self.tail
+            new_node.next = self.head
             self.tail.next = new_node
+            self.head.prev = new_node
             self.tail = new_node
         self.size += 1
 
@@ -33,59 +35,57 @@ class DLinkedList:
         new_node = DNode(value)
         if self.is_empty():
             self.head = self.tail = new_node
+            new_node.next = new_node.prev = new_node
         else:
             new_node.next = self.head
+            new_node.prev = self.tail
             self.head.prev = new_node
+            self.tail.next = new_node
             self.head = new_node
         self.size += 1
 
     def delete_node(self, node: DNode):
-        """Remove a specific node from the list."""
-        if not node:
+        if self.is_empty() or node is None:
             return None
-        if node == self.head:
-            return self.delete_front()
-        elif node == self.tail:
-            return self.delete_back()
-        else:
-            node.prev.next = node.next
-            node.next.prev = node.prev
-            self.size -= 1
-            return node.value
-
-    def delete_back(self):
-        if self.is_empty():
-            raise IndexError("Cannot delete from empty list")
-        removed = self.tail
-        if self.head == self.tail:
+        if self.size == 1 and node == self.head:
+            val = node.value
             self.head = self.tail = None
-        else:
-            self.tail = removed.prev
-            self.tail.next = None
+            self.size = 0
+            return val
+        # unlink node
+        node.prev.next = node.next
+        node.next.prev = node.prev
+        val = node.value
+        if node == self.head:
+            self.head = node.next
+        if node == self.tail:
+            self.tail = node.prev
         self.size -= 1
-        return removed.value
+        return val
 
     def delete_front(self):
-        if self.is_empty():
-            raise IndexError("Cannot delete from empty list")
-        removed = self.head
-        if self.head == self.tail:
-            self.head = self.tail = None
-        else:
-            self.head = removed.next
-            self.head.prev = None
-        self.size -= 1
-        return removed.value
+        return self.delete_node(self.head)
+
+    def delete_back(self):
+        return self.delete_node(self.tail)
 
     def __len__(self) -> int:
         return self.size
 
     def __iter__(self):
+        if self.is_empty():
+            return
         current = self.head
-        while current:
+        for _ in range(self.size):
             yield current.value
             current = current.next
 
     def __str__(self) -> str:
-        values = [str(value) for value in self]
-        return " <-> ".join(values) + " <-> None" if values else "Empty list"
+        if self.is_empty():
+            return "Empty list"
+        values = []
+        current = self.head
+        for _ in range(self.size):
+            values.append(str(current.value))
+            current = current.next
+        return " <-> ".join(values)

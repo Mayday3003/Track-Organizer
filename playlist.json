@@ -1,33 +1,37 @@
 [
     {
-      "title": "Bohemian Rhapsody",
-      "artist": "Queen",
-      "album": "A Night at the Opera",
-      "duration": 354
+        "title": "Bohemian Rhapsody",
+        "artist": "Queen",
+        "album": "A Night at the Opera",
+        "duration": 5,
+        "genre": "Unknown"
     },
     {
-      "title": "Billie Jean",
-      "artist": "Michael Jackson",
-      "album": "Thriller",
-      "duration": 294
+        "title": "Billie Jean",
+        "artist": "Michael Jackson",
+        "album": "Thriller",
+        "duration": 15,
+        "genre": "Unknown"
     },
     {
-      "title": "Imagine",
-      "artist": "John Lennon",
-      "album": "Imagine",
-      "duration": 183
+        "title": "Imagine",
+        "artist": "John Lennon",
+        "album": "Imagine",
+        "duration": 5,
+        "genre": "Unknown"
     },
     {
-      "title": "Smells Like Teen Spirit",
-      "artist": "Nirvana",
-      "album": "Nevermind",
-      "duration": 301
+        "title": "Smells Like Teen Spirit",
+        "artist": "Nirvana",
+        "album": "Nevermind",
+        "duration": 7,
+        "genre": "Unknown"
     },
     {
-      "title": "Hey Jude",
-      "artist": "The Beatles",
-      "album": "Hey Jude",
-      "duration": 431
+        "title": "Hey Jude",
+        "artist": "The Beatles",
+        "album": "Hey Jude",
+        "duration": 8,
+        "genre": "Unknown"
     }
-  ]
-  
+]

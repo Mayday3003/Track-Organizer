@@ -1,5 +1,3 @@
-# src/model/song.py
-
 class Song:
     def __init__(self, title: str, artist: str, album: str, duration: float, genre: str):
         """
