@@ -1,5 +1,3 @@
-# src/model/dlinkedlist.py
-
 class DNode:
     def __init__(self, value):
         self.value = value
@@ -9,7 +7,7 @@ class DNode:
     def __str__(self):
         return str(self.value)
 
-class DLinkedList:
+class CDLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None

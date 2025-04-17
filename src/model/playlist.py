@@ -5,12 +5,12 @@ import random
 import sys
 import select
 from typing import List
-from src.model.dlinkedlist import DLinkedList, DNode
+from src.model.cdlinkedlist import CDLinkedList, DNode
 from src.model.song import Song
 
 class Playlist:
     def __init__(self):
-        self.songs = DLinkedList()
+        self.songs = CDLinkedList()
         self.current_node = None
         self.shuffle_mode = False
         self.shuffle_order = []
