@@ -47,12 +47,39 @@ class Playlist:
             current = current.next
         if not found:
             print(f"❌ Song '{title}' not found in the playlist.")
-
+    
     def _read_input_nonblocking(self):
         dr, dw, de = select.select([sys.stdin], [], [], 0)
         if dr:
             return sys.stdin.readline().strip().lower()
         return None
+    
+    def remove_least_frequent_artist(self):
+        if self.songs.size == 0:
+            print("❌ The playlist is empty. No songs to remove.")
+            return
+
+        artist_counts = {}
+        current = self.songs.head
+
+        for _ in range(self.songs.size):
+            artist = current.value.artist
+            artist_counts[artist] = artist_counts.get(artist, 0) + 1
+            current = current.next
+
+        least_frequent_artist = min(artist_counts, key=artist_counts.get)
+        least_count = artist_counts[least_frequent_artist]
+
+        print(f"🎵 Removing all songs by '{least_frequent_artist}' (only {least_count} song(s)).")
+
+        current = self.songs.head
+        for _ in range(self.songs.size):
+            next_node = current.next
+            if current.value.artist == least_frequent_artist:
+                self.songs.delete_node(current)
+            current = next_node
+
+        print(f"✅ All songs by '{least_frequent_artist}' have been removed.")
 
     def play_current(self):
         if not self.current_node:
@@ -214,6 +241,11 @@ class Playlist:
             nodes.append(current)
             current = current.next
         random.shuffle(nodes)
+
+        shuffle_playlist = Playlist()
+        for index, node in enumerate(nodes):
+            if index == 0:
+                shuffle_playlist.
         self.shuffle_order = nodes
         self.shuffle_index = 0
         self.shuffle_played = set()

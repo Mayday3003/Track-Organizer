@@ -7,31 +7,157 @@
         "genre": "Unknown"
     },
     {
+        "title": "I Want to Break Free",
+        "artist": "Queen",
+        "album": "The Works",
+        "duration": 4,
+        "genre": "Rock"
+    },
+    {
+        "title": "We Will Rock You",
+        "artist": "Queen",
+        "album": "News of the World",
+        "duration": 3,
+        "genre": "Rock"
+    },
+    {
+        "title": "Another One Bites the Dust",
+        "artist": "Queen",
+        "album": "The Game",
+        "duration": 4,
+        "genre": "Funk Rock"
+    },
+    {
+        "title": "Radio Ga Ga",
+        "artist": "Queen",
+        "album": "The Works",
+        "duration": 5,
+        "genre": "Pop Rock"
+    },
+    {
         "title": "Billie Jean",
         "artist": "Michael Jackson",
         "album": "Thriller",
         "duration": 15,
-        "genre": "Unknown"
+        "genre": "Pop"
+    },
+    {
+        "title": "Thriller",
+        "artist": "Michael Jackson",
+        "album": "Thriller",
+        "duration": 10,
+        "genre": "Pop"
+    },
+    {
+        "title": "Beat It",
+        "artist": "Michael Jackson",
+        "album": "Thriller",
+        "duration": 6,
+        "genre": "Rock"
+    },
+    {
+        "title": "Smooth Criminal",
+        "artist": "Michael Jackson",
+        "album": "Bad",
+        "duration": 4,
+        "genre": "Pop"
     },
     {
         "title": "Imagine",
         "artist": "John Lennon",
         "album": "Imagine",
         "duration": 5,
-        "genre": "Unknown"
+        "genre": "Rock"
+    },
+    {
+        "title": "Jealous Guy",
+        "artist": "John Lennon",
+        "album": "Imagine",
+        "duration": 4,
+        "genre": "Rock"
+    },
+    {
+        "title": "Instant Karma!",
+        "artist": "John Lennon",
+        "album": "Single",
+        "duration": 3,
+        "genre": "Rock"
     },
     {
         "title": "Smells Like Teen Spirit",
         "artist": "Nirvana",
         "album": "Nevermind",
         "duration": 7,
-        "genre": "Unknown"
+        "genre": "Grunge"
+    },
+    {
+        "title": "Something in the Way",
+        "artist": "Nirvana",
+        "album": "Nevermind",
+        "duration": 7,
+        "genre": "Grunge"
+    },
+    {
+        "title": "Come as You Are",
+        "artist": "Nirvana",
+        "album": "Nevermind",
+        "duration": 5,
+        "genre": "Grunge"
+    },
+    {
+        "title": "Lithium",
+        "artist": "Nirvana",
+        "album": "Nevermind",
+        "duration": 6,
+        "genre": "Grunge"
+    },
+    {
+        "title": "Heart-Shaped Box",
+        "artist": "Nirvana",
+        "album": "In Utero",
+        "duration": 5,
+        "genre": "Grunge"
+    },
+    {
+        "title": "All Apologies",
+        "artist": "Nirvana",
+        "album": "In Utero",
+        "duration": 4,
+        "genre": "Grunge"
     },
     {
         "title": "Hey Jude",
         "artist": "The Beatles",
         "album": "Hey Jude",
         "duration": 8,
-        "genre": "Unknown"
+        "genre": "Rock"
+    },
+    {
+        "title": "Don't Let Me Down",
+        "artist": "The Beatles",
+        "album": "Hey Jude",
+        "duration": 8,
+        "genre": "Rock"
+    },
+    {
+        "title": "Let It Be",
+        "artist": "The Beatles",
+        "album": "Let It Be",
+        "duration": 4,
+        "genre": "Rock"
+    },
+    {
+        "title": "Come Together",
+        "artist": "The Beatles",
+        "album": "Abbey Road",
+        "duration": 5,
+        "genre": "Rock"
+    },
+    {
+        "title": "Yesterday",
+        "artist": "The Beatles",
+        "album": "Help!",
+        "duration": 3,
+        "genre": "Rock"
     }
 ]
