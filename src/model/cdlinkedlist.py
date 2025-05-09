@@ -1,17 +1,19 @@
+from src.model.song import Song
+
 class DNode:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-        self.prev = None
+    def __init__(self, value: Song):
+        self.value: Song = value
+        self.next: Song|None = None
+        self.prev: Song|None = None
 
     def __str__(self):
         return str(self.value)
 
 class CDLinkedList:
     def __init__(self):
-        self.head = None
-        self.tail = None
-        self.size = 0
+        self.head: DNode = None
+        self.tail: DNode = None
+        self.size: int = 0
 
     def is_empty(self) -> bool:
         return self.size == 0
@@ -77,6 +79,18 @@ class CDLinkedList:
         for _ in range(self.size):
             yield current.value
             current = current.next
+
+    def __max__(self):
+        current = self.head
+        max_value = current
+
+        for _ in range(len(self.size)):
+            if current.value.duration > max_value.value.duration:
+                max_value = current.value
+            current = current.next
+        
+        return max_value
+            
 
     def __str__(self) -> str:
         if self.is_empty():

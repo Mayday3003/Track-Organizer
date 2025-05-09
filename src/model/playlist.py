@@ -10,11 +10,9 @@ from src.model.song import Song
 
 class Playlist:
     def __init__(self):
-        self.songs = CDLinkedList()
-        self.current_node = None
-        self.shuffle_mode = False
-        self.shuffle_order = []
-        self.shuffle_index = -1
+        self.songs: CDLinkedList = CDLinkedList()
+        self.current_node: DNode|None = None
+        self.shuffle_mode: bool = False
         self.shuffle_played = set()
 
     def add_song(self, song: Song):
@@ -135,17 +133,13 @@ class Playlist:
         if not self.current_node:
             print("No next song available.")
             return
+
         if self.shuffle_mode:
-            if len(self.shuffle_played) >= len(self.shuffle_order):
-                self._init_shuffle_order()
+            if not self.current_node.next:
+                print("🔄 Reached the end of the shuffled playlist. Restarting...")
+                self.current_node = self.shuffle_playlist.head
             else:
-                for i in range(len(self.shuffle_order)):
-                    self.shuffle_index = (self.shuffle_index + 1) % len(self.shuffle_order)
-                    next_candidate = self.shuffle_order[self.shuffle_index]
-                    if next_candidate not in self.shuffle_played:
-                        self.current_node = next_candidate
-                        self.shuffle_played.add(next_candidate)
-                        break
+                self.current_node = self.current_node.next
             if auto_play:
                 self.play_current()
             return
@@ -158,10 +152,13 @@ class Playlist:
         if not self.current_node:
             print("No previous song available.")
             return
+
         if self.shuffle_mode:
-            self.shuffle_index = (self.shuffle_index - 1) % len(self.shuffle_order)
-            self.current_node = self.shuffle_order[self.shuffle_index]
-            self.shuffle_played.add(self.current_node)
+            if not self.current_node.prev:
+                print("🔄 Reached the beginning of the shuffled playlist. Restarting...")
+                self.current_node = self.shuffle_playlist.tail
+            else:
+                self.current_node = self.current_node.prev
             if auto_play:
                 self.play_current()
             return
@@ -199,8 +196,11 @@ class Playlist:
         print("\n📻 Playlist:")
         current_song = self.current_node.value if self.current_node else None
         idx = 1
-        node = self.songs.head
-        for _ in range(self.songs.size):
+
+        active_playlist = self.shuffle_playlist if self.shuffle_mode else self.songs
+        node = active_playlist.head
+
+        for _ in range(active_playlist.size):
             song = node.value
             mark = "→ " if song == current_song else "   "
             print(f"{mark}{idx}. {song.title} - {song.artist} ({int(song.duration)}s)")
@@ -230,27 +230,28 @@ class Playlist:
             self._init_shuffle_order()
         else:
             print("🔀 Shuffle mode deactivated.")
-            self.shuffle_index = -1
-            self.shuffle_order.clear()
-            self.shuffle_played.clear()
+            self.current_node = self.songs.head
 
     def _init_shuffle_order(self):
+        if self.songs.size == 0:
+            print("⚠️ Playlist is empty. Shuffle order cannot be initialized.")
+            return
+
         nodes = []
         current = self.songs.head
         for _ in range(self.songs.size):
-            nodes.append(current)
+            nodes.append(current.value)
             current = current.next
+
         random.shuffle(nodes)
 
-        shuffle_playlist = Playlist()
-        for index, node in enumerate(nodes):
-            if index == 0:
-                shuffle_playlist.
-        self.shuffle_order = nodes
-        self.shuffle_index = 0
-        self.shuffle_played = set()
-        self.current_node = self.shuffle_order[self.shuffle_index]
-        self.shuffle_played.add(self.current_node)
+        shuffle_playlist = CDLinkedList()
+        for song in nodes:
+            shuffle_playlist.insert_back(song)
+
+        self.shuffle_playlist = shuffle_playlist
+        self.current_node = self.shuffle_playlist.head
+        print("🔀 Shuffle order initialized.")
 
     def generate_subplaylist(self, titles: List[str]) -> 'Playlist':
         sub = Playlist()
@@ -259,4 +260,23 @@ class Playlist:
             if song.title.lower() in title_set:
                 sub.add_song(song)
         print(f"✅ Subplaylist created with {len(list(sub.songs))} songs.")
+        
+        return sub
+
+    def max_subplaylist(self) -> 'Playlist':
+        sub = Playlist()
+
+        duration_count = {}
+
+        for song in self.songs:
+            duration_count[song.duration] = duration_count.get(song.duration, 0) + 1
+
+        max_duration = max(duration_count, key=duration_count.get)
+
+        for song in self.songs:
+            if song.duration == max_duration:
+                sub.add_song(song)
+        
+        print(f"✅ Subplaylist creada con {len(list(sub.songs))} canciones con duración {max_duration} segundos.")
+
         return sub

@@ -19,7 +19,8 @@ def show_menu():
     print("9. Skip ahead in current song")
     print("10. Generate subplaylist")
     print("11. Save playlist to file")
-    print("12. Remove least frequent artist")  # Nueva opción
+    print("12. Remove least frequent artist")
+    print("13. Mode subplaylist")
     print("0. Exit")
     print(Fore.CYAN + "=" * 50 + Style.RESET_ALL)
 
@@ -72,8 +73,10 @@ def handle_menu_choice(choice: str, playlist: Playlist, filepath: str):
         handle_generate_subplaylist(playlist)
     elif choice == '11':
         playlist.save_to_file(filepath)
-    elif choice == '12':  # Nueva opción
+    elif choice == '12':
         handle_remove_least_frequent_artist(playlist)
+    elif choice == '13':
+        handle_generate_max_subplaylist(playlist)
     elif choice == '0':
         print(Fore.GREEN + "\n👋 Thanks for using the Music Player. Goodbye!" + Style.RESET_ALL)
         exit()
@@ -105,6 +108,14 @@ def handle_generate_subplaylist(playlist: Playlist):
     titles = titles_input.split(",")
     subplaylist = playlist.generate_subplaylist(titles)
     sub_choice = input("Do you want to play the subplaylist? (y/n): ").strip().lower()
+    if sub_choice == 'y':
+        run_subplaylist(subplaylist)
+
+def handle_generate_max_subplaylist(playlist: Playlist):
+    subplaylist = playlist.max_subplaylist()
+
+    sub_choice = input("Do you want to play the subplaylist? (y/n): ").strip().lower()
+
     if sub_choice == 'y':
         run_subplaylist(subplaylist)
 
