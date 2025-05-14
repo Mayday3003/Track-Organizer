@@ -24,8 +24,8 @@ class Playlist:
             self.current_node = self.songs.head
 
     def _song_exists(self, title: str) -> bool:
-        for s in self.songs:
-            if s.title.lower() == title.lower():
+        for song in self.songs:
+            if song.title.lower() == title.lower():
                 return True
         return False
 
@@ -54,7 +54,7 @@ class Playlist:
     
     def remove_least_frequent_artist(self):
         if self.songs.size == 0:
-            print("❌ The playlist is empty. No songs to remove.")
+            print("The playlist is empty. No songs to remove.")
             return
 
         artist_counts = {}
@@ -77,7 +77,7 @@ class Playlist:
                 self.songs.delete_node(current)
             current = next_node
 
-        print(f"✅ All songs by '{least_frequent_artist}' have been removed.")
+        print(f" All songs by '{least_frequent_artist}' have been removed.")
 
     def play_current(self):
         if not self.current_node:
@@ -280,3 +280,18 @@ class Playlist:
         print(f"✅ Subplaylist creada con {len(list(sub.songs))} canciones con duración {max_duration} segundos.")
 
         return sub
+
+
+    #Suplaylist donde la duración sea mayor que la anterior y menor que la siguiente
+    def subplaylist_max_min(self):
+        current = self.songs.head
+        titles = []
+
+        for _ in range(self.songs.size):
+            if (current.value.duration > current.prev.value.duration) and (current.value.duration < current.next.value.duration):
+                titles.append(current.value.title)  
+            current = current.next
+
+        return self.generate_subplaylist(titles)
+                    
+            

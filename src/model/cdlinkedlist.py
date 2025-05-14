@@ -52,7 +52,6 @@ class CDLinkedList:
             self.head = self.tail = None
             self.size = 0
             return val
-        # unlink node
         node.prev.next = node.next
         node.next.prev = node.prev
         val = node.value
@@ -81,16 +80,18 @@ class CDLinkedList:
             current = current.next
 
     def __max__(self):
-        current = self.head
-        max_value = current
+        if self.is_empty():
+            return None 
 
-        for _ in range(len(self.size)):
+        current = self.head
+        max_value = current  
+
+        for _ in range(self.size): 
             if current.value.duration > max_value.value.duration:
-                max_value = current.value
+                max_value = current  
             current = current.next
-        
-        return max_value
-            
+
+        return max_value 
 
     def __str__(self) -> str:
         if self.is_empty():

@@ -76,7 +76,8 @@ def handle_menu_choice(choice: str, playlist: Playlist, filepath: str):
     elif choice == '12':
         handle_remove_least_frequent_artist(playlist)
     elif choice == '13':
-        handle_generate_max_subplaylist(playlist)
+        subplaylist = playlist.subplaylist_max_min()
+        run_subplaylist(subplaylist)
     elif choice == '0':
         print(Fore.GREEN + "\n👋 Thanks for using the Music Player. Goodbye!" + Style.RESET_ALL)
         exit()
@@ -93,6 +94,7 @@ def handle_add_song(playlist: Playlist):
 def handle_remove_song(playlist: Playlist):
     title = input("Enter the title of the song to remove: ").strip()
     playlist.remove_song(title)
+
 
 
 def handle_skip_ahead(playlist: Playlist):
@@ -141,8 +143,10 @@ def run_subplaylist(subplaylist: Playlist):
             subplaylist.previous_song()
         elif choice == '5':
             break
+
         else:
             print(Fore.RED + "❌ Invalid option.")
+            
 
 def handle_remove_least_frequent_artist(playlist: Playlist):
     print(Fore.YELLOW + "\n🔍 Removing songs by the least frequent artist..." + Style.RESET_ALL)
